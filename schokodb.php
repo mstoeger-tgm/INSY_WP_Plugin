@@ -26,4 +26,19 @@ function show_schnaeppchen() {
 	echo '</table>';
         return ob_get_clean();
 }
+function kunstschauen(){
+	global $wpdb;
+	ob_start();
+	$res = $wpdb->get_results("SELECT name from Kunstschau");
+	echo "<form method='get'><select name='kunstschau'>";
+	foreach ($res as $r){
+		echo '<option>';
+		echo $r->name;
+		echo '</option>';
+	}
+	echo "</select><input type='submit' value='Anzeigen'/></form>";
+	return ob_get_clean();
+}
 add_shortcode('schnaeppchen','show_schnaeppchen');
+add_shortcode('kunstschauen','kunstschauen');
+
